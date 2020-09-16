@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 Resources used:
   Sydney Wishner, Sophie Laurence
@@ -10,4 +11,18 @@ On a scale from -2 to 2:
   How much did you enjoy the assignment? 
   2
 Additional notes: Was pretty difficult, but much easier when I drew what I wanted to print. For some reason, when there is a depth passed that isn't default, the
+=======
+
+Resources used:
+  Sydney Wishner, Sophie Laurence
+Time spent on assignment: 1.5 hours
+On a scale from -2 to 2:
+  How hard was the assignment? 
+  1.5
+  How much did you learn from the assignment? 
+  1.5
+  How much did you enjoy the assignment? 
+  2
+Additional notes: Was pretty difficult, but much easier when I drew what I wanted to print. For some reason, when there is a depth passed that isn't default, the
+>>>>>>> d64aae04f5f6455e52738f4a7b9be49df14750f0
                     color/outline got messed up but it workd with default value.

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 Resources used:
   StackOverflow, Java Documentation
@@ -10,4 +11,18 @@ On a scale from -2 to 2:
   <-2 being you hated having to do it, 2 being you would have done it even if it was not assigned, 0 being that in the middle.>
 Additional notes: <Anything else you'd like me to know when grading it>
 Nothing wrong with the assignment, I just think working with Java graphics is tedious and haven't had great experiences with it before.
+=======
+
+Resources used:
+  StackOverflow, Java Documentation
+On a scale from -2 to 2:
+  How hard was the assignment? 1
+  <-2 being super easy, 2 being super hard, 0 being just right.>
+  How much did you learn from the assignment? 0
+  <-2 being learned nothing, 2 being leared far more than you expected, 0 being what you would expect from an assignment of this magnitude>
+  How much did you enjoy the assignment? -1
+  <-2 being you hated having to do it, 2 being you would have done it even if it was not assigned, 0 being that in the middle.>
+Additional notes: <Anything else you'd like me to know when grading it>
+Nothing wrong with the assignment, I just think working with Java graphics is tedious and haven't had great experiences with it before.
+>>>>>>> d64aae04f5f6455e52738f4a7b9be49df14750f0
 I found it difficult to create the grid of drawings, making them evenly spaced out in a natural grid-like format.
