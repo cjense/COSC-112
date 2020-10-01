@@ -22,4 +22,9 @@ public class Pair {
       Pair sum = new Pair(x + p.x, y + p.y);
       return sum;
     }
+
+    public LineSegment getCopy() {
+        
+    }
+
   }
