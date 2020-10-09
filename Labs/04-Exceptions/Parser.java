@@ -44,16 +44,13 @@ public class Parser {
                 throw new IOException(e);
             }
 
-            if(count < 1 && data == 45) { // if first digit is a hyphen, mark as negative number
-                System.out.println("negative");
+            if(count == 0 && data == 45) { // if first digit is a hyphen, mark as negative number
                 isNegative = true;
-            } else if (count < 1 && data != 45) {
-                System.out.println("notn negative");
+            } else if (count == 0 && data != 45 && data <= 48 && data >= 57) {
+                number += digit;
                 isNegative = false;
-            } else if(count < 1 && data >= 48 && data <= 57) { // if you're reading the first digit and inputStream returns ASCII values 0-9
+            } else if(count == 0 && data >= 48 && data <= 57) { // if you're reading the first digit and inputStream returns ASCII values 0-9
                 number += digit; // add digit to number
-                System.out.println("second not negative");
-                isNegative = false;
             }
 
             if(count > 0 && data >= 48 && data <= 57) { // if you're reading the first digit and inputStream returns ASCII values that correspond to ints 0-9
@@ -68,21 +65,20 @@ public class Parser {
                 break;
             } else if(data == 32 && number > 0) {
                 return number;
-            } else if(count > 0 && isNegative && data < 48 || data > 57 && data != 13 && data != 10) {
+            } else if(count > 0 && isNegative && (data < 48 || data > 57) && data != 13 && data != 10) {
                 throwException = true;
                 throw new InvalidIntegerException("Symbol '-' followed by non-numerical character '" + (char) data + "' encountered.");
-            } else if(data < 48 || data > 57) {
+            } else if(data != 45 && (data < 48 || data > 57)) {
                 throwException = true;
                 throw new InvalidIntegerException("Non-numerical character '" + (char) data + "' encountered.");
             }
             count++;
         }
 
-        if(isNegative && throwException == false) { // if number has hyphen in front, return as negative number
+        if(isNegative) { // if number has hyphen in front, return as negative number
             return -number;
-        } else if(throwException == false) { // else return as positive number
+        } else{ // else return as positive number
             return number;
         }
-        return 0;
     }
 }
