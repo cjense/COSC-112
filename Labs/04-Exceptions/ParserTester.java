@@ -21,12 +21,16 @@ public class ParserTester {
 		if (x == -1) {
 		    System.out.println("Goodbye!");
 		    return;
-		}		
+		}
+
 	    }
 	    catch (IOException e) {
 		System.out.println("Reading error: " + e);
 		return;
-	    }	    
+		}
+		catch (InvalidIntegerException i) {
+		System.out.println("Could not read integer. " + i);
+		}
 
 	}
         
