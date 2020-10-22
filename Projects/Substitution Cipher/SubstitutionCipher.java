@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class SubstitutionCipher extends Cipher {
     private long _key;
@@ -13,17 +14,27 @@ public class SubstitutionCipher extends Cipher {
     }
 
     public SubstitutionCipher(long key) {
-        _key = key;
+        super();
     }
 
     public ArrayList<Character> encrypt(ArrayList<Character> cleartext) {
         ArrayList<Character> ciphertext;
-        ArrayList<Character> scrambled;
 
-        for(int i = 0; i < cleartext.size() - 1) {
-            sub = rand.nextInt(cleartext.size() - 1);
-            if(scrambled.contains(sub))
+        ArrayList<Character> scrambled;
+        for(int i = 0; i < (alphabetray.size() - 1); i++) {
+            sub = rand.nextInt((alphabetray.size() - 1) -1);
+            if (!(scrambled.contains(alphabetray.get(sub)))) {
+                scrambled.set(i, alphabetray.get(sub));
+            } else { i--; } 
         }
+
+        for(int i = 0; i < (scrambled.size() - 1); i++) {
+            if(cleartext.contains(scrambled.get(i))) {
+                Collections.replaceAll(scrambled, ciphertext.get(scrambled.get(i)), scrambled.get(i));
+            }
+        }
+
+        System.out.println(ciphertext);
 
         return ciphertext;
     }
