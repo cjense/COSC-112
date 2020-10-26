@@ -1,55 +1,53 @@
 import java.util.Random;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class SubstitutionCipher extends Cipher {
-    int sub;
-    Random rand = new Random();
-    ArrayList<Character> alphabetray = new ArrayList<Character>();
-    ArrayList<Character> ciphertext = new ArrayList<Character>();
-    ArrayList<Character> scrambled = new ArrayList<Character>();
 
     public SubstitutionCipher(long key) { // constructor
         super(key);
     }
 
-    public ArrayList<Character> scrambleAlphabet() {
-
-        String abc = new String("abcdefghijklmnopqrstuvwxyz");
-    
-        for(int i = 0; i < abc.length(); i++) {
-            alphabetray.add(abc.charAt(i));
-        }
-        return alphabetray;
-    }
-
     public ArrayList<Character> encrypt(ArrayList<Character> cleartext) {
-        
-        for(int i = 0; i < (alphabetray.size() - 1); i++) {
-            sub = rand.nextInt((alphabetray.size() - 1) -1);
-            if (!(scrambled.contains(alphabetray.get(sub)))) {
-                scrambled.set(i, alphabetray.get(sub));
-            } else { i--; } 
-        }
+        Random rand = new Random(getKey());
 
-        for(int i = 0; i < (scrambled.size() - 1); i++) {
-            if(cleartext.contains(scrambled.get(i))) {
-                Collections.replaceAll(scrambled, ciphertext.get(scrambled.get(i)), scrambled.get(i));
+        int i= 0;
+        ArrayList<Integer> substitution = new ArrayList<Integer>();
+        ArrayList<Character> ciphertext = new ArrayList<Character>();
+        while(i < 256) {
+            int random = rand.nextInt(256);
+            if(substitution.contains((Integer) random) == false) {
+                substitution.add(random);
+                i++;
             }
         }
 
-        System.out.println(ciphertext);
+        for(int j = 0; j < cleartext.size(); j++) {
+            char clearchar = cleartext.get(j);
+            char cipherchar = (char) ((int) substitution.get((int) clearchar));
+            ciphertext.add(cipherchar);
+        }
 
         return ciphertext;
     }
     
     public ArrayList<Character> decrypt(ArrayList<Character> ciphertext) {
+        Random rand = new Random(getKey());
+        int i = 0;
         ArrayList<Character> cleartext = new ArrayList<Character>();
+        ArrayList<Integer> substitution = new ArrayList<Integer>();
 
-        for(int i = 0; i < (scrambled.size() - 1); i++) {
-            if(ciphertext.contains(scrambled.get(i))) {
-                Collections.replaceAll(ciphertext, scrambled.get(i), alphabetray.get(scrambled.get(i)));
+        while(i < 256) {
+            int random = rand.nextInt(256);
+            if(substitution.contains((Integer) random) == false) {
+                substitution.add(random);
+                i++;
             }
+        }
+
+        for(int k = 0; k < ciphertext.size(); k++) {
+            char cipherchar = ciphertext.get(k);
+            char clearchar = (char) ((int) substitution.indexOf((int) cipherchar));
+            cleartext.add(clearchar);
         }
 
         return cleartext;

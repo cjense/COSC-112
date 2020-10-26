@@ -105,7 +105,7 @@ public abstract class Cipher {
 	if (cipherName.equals("Caesar")) {
 	    cipher = new CaesarCipher(key);
 	} else if (cipherName.equals("Substitution")) {
-	    //cipher = new SubstitutionCipher(key);
+	    cipher = new SubstitutionCipher(key);
 	} else {
 	    throw new RuntimeException("Cipher.create(): Unknown cipher " +
 				       cipherName);
