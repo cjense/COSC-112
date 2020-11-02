@@ -46,7 +46,15 @@ public class DiskGame extends JPanel implements KeyListener {
     public void keyPressed(KeyEvent e) {
 	int code = e.getKeyCode();
 
-	// complete method
+	if(code == KEY_UP) {
+        game.setShipVertAccel(1);
+    } else if (code == KEY_DOWN) {
+        game.setShipVertAccel(-1);
+    } else if (code == KEY_RIGHT) {
+        game.setShipHorAccel(1);
+    } else if (code == KEY_LEFT) {
+        game.setShipHorAccel(-1);
+    }
 
 	if (code == KEY_Q) {
 	    System.out.println("Goodbye!");
@@ -63,9 +71,18 @@ public class DiskGame extends JPanel implements KeyListener {
      * stop accelerating upwards, etc.
      */
     public void keyReleased(KeyEvent e) {
-	
-	// complete method
-	
+        int code = e.getKeyCode();
+
+            if(code == KEY_UP) {
+            game.setShipVertAccel(0);
+        } else if (code == KEY_DOWN) {
+            game.setShipVertAccel(0);
+        } else if (code == KEY_RIGHT) {
+            game.setShipHorAccel(0);
+        } else if (code == KEY_LEFT) {
+            game.setShipHorAccel(0);
+        }
+
     }
 
     

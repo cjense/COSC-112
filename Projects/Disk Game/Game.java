@@ -71,7 +71,7 @@ class Game {
      */
     public void setShipVertAccel (int amount) {
 
-	// complete this method
+        ship.setAcceleration(new Pair(0, (ACCEL_FACTOR * amount)));
 	
     }
 
@@ -84,7 +84,7 @@ class Game {
      */
     public void setShipHorAccel (int amount) {
 
-	// complete this method
+        ship.setAcceleration(new Pair((ACCEL_FACTOR * amount), 0));
 
     }
 
