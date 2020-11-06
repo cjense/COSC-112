@@ -43,7 +43,23 @@ class Game {
      */
     private void reset () {
 	
-	// complete this method
+        for(int i = 0; i < hazards.size(); i++) {
+            hazards.remove(i);
+        }
+
+        for(int i = 0; i < goals.size(); i++) {
+            goals.remove(i);
+        }
+
+        for(int i = 0; i < NUM_GOALS; i++) {
+            BouncingDisk goal = new BouncingDisk(this, GOAL_RADIUS, GOAL_COLOR);
+            goals.add(goal);
+        }
+
+        for(int i = 0; i < NUM_HAZARDS; i++) {
+            BouncingDisk hazard = new BouncingDisk(this, HAZARD_RADIUS, HAZARD_COLOR);
+            hazards.add(hazard);
+        }
 	
     }
 
@@ -58,24 +74,15 @@ class Game {
      */
     public void drawShapes(Graphics g){
 
-        for(int i = 0; i < NUM_GOALS; i++) {
-            BouncingDisk goal = new BouncingDisk(this, GOAL_RADIUS, GOAL_COLOR, new Pair(width / 2, height / 2));
-            goals.add(goal);
+        for(int i = 0; i < hazards.size(); i++) {
+            (hazards.get(i)).draw(g);
         }
 
-        for(int i = 0; i < NUM_HAZARDS; i++) {
-            BouncingDisk hazard = new BouncingDisk(this, HAZARD_RADIUS, HAZARD_COLOR, new Pair(width / 2, height / 2));
-            hazards.add(hazard);
+        for(int i = 0; i < goals.size(); i++) {
+            (goals.get(i)).draw(g);
         }
-
-        for (BouncingDisk bouncingDisk : goals) {
-            bouncingDisk.draw(g);
-            
-        }
-
-        for (BouncingDisk bouncingDisk : hazards) {
-            bouncingDisk.draw(g);
-        }
+        
+        ship.draw(g);
     
     }
 
@@ -124,8 +131,14 @@ class Game {
      */
     private void checkGoalCollision () {
 
-	// complete this method
-	
+        for(int i = 0; i < goals.size(); i++) {
+            if(ship.overlaps(goals.get(i))) {
+                goals.remove(goals.get(i));
+            }
+            if(goals.size() == 0) {
+                reset();
+            }
+        }	
     }
 
     /*
@@ -138,7 +151,11 @@ class Game {
      */
     private void checkHazardCollision () {
 
-	// complete this method
+        for(int i = 0; i < hazards.size(); i++) {
+            if(ship.overlaps(hazards.get(i))) {
+                System.exit(0);
+            }
+        }	
 	
     }
 }
