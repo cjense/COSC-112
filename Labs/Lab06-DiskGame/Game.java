@@ -58,8 +58,25 @@ class Game {
      */
     public void drawShapes(Graphics g){
 
-	// complete this method
-	
+        for(int i = 0; i < NUM_GOALS; i++) {
+            BouncingDisk goal = new BouncingDisk(this, GOAL_RADIUS, GOAL_COLOR, new Pair(width / 2, height / 2));
+            goals.add(goal);
+        }
+
+        for(int i = 0; i < NUM_HAZARDS; i++) {
+            BouncingDisk hazard = new BouncingDisk(this, HAZARD_RADIUS, HAZARD_COLOR, new Pair(width / 2, height / 2));
+            hazards.add(hazard);
+        }
+
+        for (BouncingDisk bouncingDisk : goals) {
+            bouncingDisk.draw(g);
+            
+        }
+
+        for (BouncingDisk bouncingDisk : hazards) {
+            bouncingDisk.draw(g);
+        }
+    
     }
 
     /*
@@ -90,6 +107,7 @@ class Game {
 
 
     public void update(double time){
+
 	ship.update(this, time);
 	checkGoalCollision();
 	checkHazardCollision();
