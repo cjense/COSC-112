@@ -102,7 +102,7 @@ public class DiskGame extends JPanel implements KeyListener {
     
     public static void main(String[] args){
         JFrame frame = new JFrame("Disk Game");
-	System.out.println("Press 'q' to quit");
+	System.out.println("Press 'q' to quit. You have 3 lives.");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         DiskGame mainInstance = new DiskGame();
         frame.setContentPane(mainInstance);

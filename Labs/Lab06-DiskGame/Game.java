@@ -19,6 +19,9 @@ class Game {
     private int width;
     private int height;
 
+    private int goalcount = 0;
+    private int lives = 2;
+
     private ArrayList<BouncingDisk> hazards = new ArrayList<BouncingDisk>();
     private ArrayList<BouncingDisk> goals = new ArrayList<BouncingDisk>();
     private BouncingDisk ship;
@@ -134,6 +137,8 @@ class Game {
         for(int i = 0; i < goals.size(); i++) {
             if(ship.overlaps(goals.get(i))) {
                 goals.remove(goals.get(i));
+                goalcount++;
+                System.out.println("Score: " + goalcount);
             }
             if(goals.size() == 0) {
                 reset();
@@ -152,7 +157,12 @@ class Game {
     private void checkHazardCollision () {
 
         for(int i = 0; i < hazards.size(); i++) {
-            if(ship.overlaps(hazards.get(i))) {
+            if(ship.overlaps(hazards.get(i)) && lives > 0) {
+                System.out.println("Lives: " + lives);
+                lives -= 1;
+                hazards.remove(hazards.get(i));
+            } else if(ship.overlaps(hazards.get(i)) && lives == 0) {
+                System.out.println("Final Score: " + goalcount);
                 System.exit(0);
             }
         }	
