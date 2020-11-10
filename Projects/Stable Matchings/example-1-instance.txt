@@ -1,0 +1,9 @@
+hospitals
+A B
+residents
+a b
+preferences
+a: A B
+b: A B
+A: a b
+B: a b

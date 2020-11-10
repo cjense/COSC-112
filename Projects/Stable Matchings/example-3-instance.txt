@@ -1,0 +1,15 @@
+hospitals
+A B C D E
+residents
+a b c d e
+preferences
+a: B D E A C
+b: B D C A E
+c: C A B D E
+d: D A B C E
+e: B C E D A
+A: a b c d e
+B: b a c d e
+C: d b a c e
+D: e b a c d
+E: d a b c e
