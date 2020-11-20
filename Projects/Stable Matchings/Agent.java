@@ -67,9 +67,21 @@ public class Agent {
      */
     public boolean prefers (Agent a, Agent b) {
 	
-	// complete this implementation
+        for(int i = 0; i < prefList.size(); i++) {
+            if(!prefList.contains(a)) {
+                return false;
+            } else if(prefList.contains(a) && (b == null | !prefList.contains(b))) {
+                return true;
+            } else if(a == null && !prefList.contains(b)) {
+                return true;
+            }
 
-	return false; // delete this line
+            if((prefList.contains(a) && prefList.contains(b)) && (prefList.indexOf(a) < prefList.indexOf(b))) {
+                return true;
+            }
+
+        }
+
     }
 
     /*
@@ -84,7 +96,9 @@ public class Agent {
      */
     public void proposal (Agent a) {
 
-	// complete this implementation
+	    if(this.prefers(curMatch, a)) {
+            setCurMatch(a);
+        }
 	
     }
 
@@ -101,7 +115,7 @@ public class Agent {
      */
     public void refusal () {	
 
-	// complete this implementation
+        if()
 	
     }
 

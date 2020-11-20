@@ -190,7 +190,9 @@ public class SMInstance {
      */
     public void computeStableMatching () {
 	
-	// complete this implementation
+	for(int i = 0; i < residents.size(); i++) {
+        if()
+    }
 	
     }
 
