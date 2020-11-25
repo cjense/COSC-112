@@ -191,7 +191,9 @@ public class SMInstance {
     public void computeStableMatching () {
 	
 	for(int i = 0; i < residents.size(); i++) {
-        if()
+        Agent currentResident = residents.get(i);
+        ArrayList <Agent> currentPrefList = currentResident.getPrefList();
+        (currentResident).proposal(currentPrefList.get(0));
     }
 	
     }
@@ -224,7 +226,12 @@ public class SMInstance {
      */
     public void setMatching (Matching matching) {
 
-	// complete this implementation
+        for(Pair<Agent> p : matching) {
+            new Pair<Agent> match = Pair(first, second);
+            match.setFirst(p.getFirst());
+            match.setSecond(p.getSecond());
+        }
+        
     }
 
     /*
@@ -241,7 +248,7 @@ public class SMInstance {
 
     public Pair<Agent> getBlockingPair () {
 
-	// complete this implementation
+	    for(int i = 0; i < )
 	
 	return null;
     }

@@ -66,21 +66,27 @@ public class Agent {
      * true if and only if only if a appears before b.
      */
     public boolean prefers (Agent a, Agent b) {
-	
+    
+        // iterate over this agent's prefList
         for(int i = 0; i < prefList.size(); i++) {
+            // if a is not in prefList, return false
             if(!prefList.contains(a)) {
                 return false;
-            } else if(prefList.contains(a) && (b == null | !prefList.contains(b))) {
+            // if prefList contains a and b is null or not on preflist, return true
+            } else if(prefList.contains(a) && (b == null || !prefList.contains(b))) {
                 return true;
+            // if a is null and preflist doesn't contain b, return true
             } else if(a == null && !prefList.contains(b)) {
                 return true;
             }
 
+            // if a and b are in prefList and a is before b, return true
             if((prefList.contains(a) && prefList.contains(b)) && (prefList.indexOf(a) < prefList.indexOf(b))) {
                 return true;
             }
 
         }
+        return false; // maybe remove this?
 
     }
 
@@ -96,8 +102,16 @@ public class Agent {
      */
     public void proposal (Agent a) {
 
+        // if this Agent prefers current match over Aent a, don't change current match
 	    if(this.prefers(curMatch, a)) {
-            setCurMatch(a);
+            return;
+        // if this Agent prefers Agent a over current match, change current match to a
+        } else if(this.prefers(a, curMatch)) {
+            // if current match is not null, refuse current match before setting to a
+            if(curMatch != null) {
+                this.refusal();
+            }
+            this.setCurMatch(a);
         }
 	
     }
@@ -105,7 +119,7 @@ public class Agent {
     /*
      * Method: void refusal ()
      *
-     * refusal() gets call on this Agent when this agent receives a
+     * refusal() gets called on this Agent when this agent receives a
      * refusal from its previous match. When this occurs, this Agent
      * should propose to the "next" agent in prefList (if any). That
      * is, the "next" Agent is the one immediately following the
@@ -114,9 +128,13 @@ public class Agent {
      * proposing to the first agent in prefList.
      */
     public void refusal () {	
-
-        if()
-	
+        // if current match is not set, send proposal to the first item in prefList
+        if(curMatch == null) {
+            this.proposal(prefList.get(0));
+        // if nextProposal is in prefList, send proposal to nextProposal
+        } else if(prefList.contains(prefList.get(curIndex + 1))) {
+            this.proposal(prefList.get(curIndex + 1));
+        }
     }
 
     // reset this Agent's match to its pristine state: curMatch is
