@@ -190,10 +190,8 @@ public class SMInstance {
      */
     public void computeStableMatching () {
 	
-	for(int i = 0; i < residents.size(); i++) {
-        Agent currentResident = residents.get(i);
-        ArrayList <Agent> currentPrefList = currentResident.getPrefList();
-        (currentResident).proposal(currentPrefList.get(0));
+    for(Agent a : residents) {
+        a.proposal(a.getPrefList
     }
 	
     }
@@ -205,12 +203,12 @@ public class SMInstance {
      * pairs that are currently matched. That is, the Matching should
      * contain a pair (res, hos) for each resident res and hospital
      * hos such that hos is res's curMatch and res is hos's
-     * curMatch. The Matching should not contain an Pairs where on of
+     * curMatch. The Matching should not contain any Pairs where one of
      * the terms is null.
      */
     public Matching getMatching () {
 
-	// complete this implementation
+	
 
 	return new Matching(this); // delete this line
     }
@@ -227,7 +225,7 @@ public class SMInstance {
     public void setMatching (Matching matching) {
 
         for(Pair<Agent> p : matching) {
-            new Pair<Agent> match = Pair(first, second);
+            new Pair<Agent> match = Pair<Agent>(first, second);
             match.setFirst(p.getFirst());
             match.setSecond(p.getSecond());
         }
