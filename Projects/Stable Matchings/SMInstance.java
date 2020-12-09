@@ -189,9 +189,11 @@ public class SMInstance {
      * this proposal).
      */
     public void computeStableMatching () {
-	
+    
+    // loop through each Agent in residents arrayList
     for(Agent a : residents) {
-        a.proposal(a.getPrefList
+        a.setCurMatch((a.getPrefList()).get(0)); // set current match to first in preflist
+        a.proposal(a.getCurMatch()); // propose to current match
     }
 	
     }
@@ -207,10 +209,15 @@ public class SMInstance {
      * the terms is null.
      */
     public Matching getMatching () {
+        Matching match = new Matching(this);
 
+        for(Agent a : residents) {
+            match.addPair(new Pair(a , a.getCurMatch()));
+
+        }
+
+        return match;
 	
-
-	return new Matching(this); // delete this line
     }
 
     /*
@@ -225,9 +232,8 @@ public class SMInstance {
     public void setMatching (Matching matching) {
 
         for(Pair<Agent> p : matching) {
-            new Pair<Agent> match = Pair<Agent>(first, second);
-            match.setFirst(p.getFirst());
-            match.setSecond(p.getSecond());
+            p.getFirst().setCurMatch(p.getSecond());
+            p.getSecond().setCurMatch(p.getFirst());
         }
         
     }
@@ -245,10 +251,19 @@ public class SMInstance {
      */
 
     public Pair<Agent> getBlockingPair () {
+        Pair<Agent> blockingPairs(T first, T second);
 
-	    for(int i = 0; i < )
+        for(Agent h : hospitals) {
+            for(Agent a : residents) {
+                if(a.prefers(a.getCurMatch(), h) && h.prefers(h.getCurMatch(), a)) {
+                    blockingPairs.setFirst(a);
+                    blockingPairs.setSecond(h);
+                }
+            }
+        }
+
+        return blockingPairs;
 	
-	return null;
     }
 
     /*

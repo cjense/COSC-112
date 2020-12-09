@@ -102,16 +102,21 @@ public class Agent {
      */
     public void proposal (Agent a) {
 
-        // if this Agent prefers current match over Aent a, don't change current match
+        // if this Agent prefers current match over Agent a, don't change current match
+        // but send refusal to Agent a
 	    if(this.prefers(curMatch, a)) {
-            return;
+            a.refusal();
         // if this Agent prefers Agent a over current match, change current match to a
+        // and send refusal to current match
         } else if(this.prefers(a, curMatch)) {
-            // if current match is not null, refuse current match before setting to a
+            // if current match is not null, set current match to a then refuse
+            // otherwise just set current match to Agent a
             if(curMatch != null) {
-                this.refusal();
+                this.setCurMatch(a);
+                curMatch.refusal();
+            } else {
+                this.setCurMatch(a);
             }
-            this.setCurMatch(a);
         }
 	
     }
@@ -128,13 +133,15 @@ public class Agent {
      * proposing to the first agent in prefList.
      */
     public void refusal () {	
-        // if current match is not set, send proposal to the first item in prefList
-        if(curMatch == null) {
+
+        if(this.curMatch == null) {
+            this.setCurMatch(prefList.get(0));
             this.proposal(prefList.get(0));
-        // if nextProposal is in prefList, send proposal to nextProposal
-        } else if(prefList.contains(prefList.get(curIndex + 1))) {
-            this.proposal(prefList.get(curIndex + 1));
+        } else { 
+            this.setCurMatch(prefList.get(curIndex));
+            this.proposal(prefList.get(curIndex));
         }
+
     }
 
     // reset this Agent's match to its pristine state: curMatch is
