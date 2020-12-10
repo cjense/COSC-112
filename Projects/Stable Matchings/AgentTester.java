@@ -12,19 +12,19 @@ public class AgentTester {
 
     public static void main (String[] args) {
 
-	// // test prefers method
-	// System.out.println("Testing 'prefers' method...");
-	// if (testPrefersMethod()) 
-	//     System.out.println("Test passed!\n");
-	// else
-	//     System.out.println("Test failed!\n");
+	// test prefers method
+	System.out.println("Testing 'prefers' method...");
+	if (testPrefersMethod()) 
+	    System.out.println("Test passed!\n");
+	else
+	    System.out.println("Test failed!\n");
 
-	// test proposal method
-	// System.out.println("Testing 'proposal' method...");
-	// if (testProposalMethod()) 
-	//     System.out.println("Test passed!\n");
-	// else
-	//     System.out.println("Test failed!\n");
+	//test proposal method
+	System.out.println("Testing 'proposal' method...");
+	if (testProposalMethod()) 
+	    System.out.println("Test passed!\n");
+	else
+	    System.out.println("Test failed!\n");
 
 
 	// test refusal method

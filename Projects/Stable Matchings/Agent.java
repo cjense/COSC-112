@@ -134,12 +134,17 @@ public class Agent {
      */
     public void refusal () {	
 
-        if(this.curMatch == null) {
+        // if Agent hasn't proposed, set match to first hospital and propose
+        if(this.curIndex == -1) {
             this.setCurMatch(prefList.get(0));
-            this.proposal(prefList.get(0));
-        } else { 
-            this.setCurMatch(prefList.get(curIndex));
-            this.proposal(prefList.get(curIndex));
+            curMatch.proposal(this);
+        // if Agent hasn't proposed to all their options, propose to next item in prefList
+        } else if(prefList.size() - 1 >= curIndex + 1) { 
+            this.setCurMatch(prefList.get(curIndex + 1));
+            (prefList.get(curIndex)).proposal(this);
+        // if Agent has exhausted all of their options, maybe time to find a new career
+        } else {
+            this.setCurMatch(null);
         }
 
     }

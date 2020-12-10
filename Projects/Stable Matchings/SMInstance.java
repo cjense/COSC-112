@@ -209,8 +209,11 @@ public class SMInstance {
      * the terms is null.
      */
     public Matching getMatching () {
+        // create new matching with SMInstance
         Matching match = new Matching(this);
 
+        // for each resident, create a new pair and add it to match list
+        // each pair corresponds to resident and its currently matched hospital
         for(Agent a : residents) {
             match.addPair(new Pair(a , a.getCurMatch()));
 
@@ -231,6 +234,7 @@ public class SMInstance {
      */
     public void setMatching (Matching matching) {
 
+        // for each pair in matching, set current match of each to its matched agent
         for(Pair<Agent> p : matching) {
             p.getFirst().setCurMatch(p.getSecond());
             p.getSecond().setCurMatch(p.getFirst());
@@ -251,18 +255,18 @@ public class SMInstance {
      */
 
     public Pair<Agent> getBlockingPair () {
-        Pair<Agent> blockingPairs(T first, T second);
+        Pair<Agent> blockingPair;
 
         for(Agent h : hospitals) {
             for(Agent a : residents) {
                 if(a.prefers(a.getCurMatch(), h) && h.prefers(h.getCurMatch(), a)) {
-                    blockingPairs.setFirst(a);
-                    blockingPairs.setSecond(h);
+                    blockingPair = new Pair<Agent>(a, h);
+                    return blockingPair;
                 }
             }
         }
 
-        return blockingPairs;
+        return null;
 	
     }
 
@@ -276,7 +280,11 @@ public class SMInstance {
      */
     public boolean isStable () {
 
-	// complete this implementation
+	for(Agent a : residents) {
+        if(getBlockingPair() == null) {
+            return true;
+        } else { return false; }
+    }
 
 	return false; // delete this line
     }
