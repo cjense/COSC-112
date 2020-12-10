@@ -189,11 +189,14 @@ public class SMInstance {
      * this proposal).
      */
     public void computeStableMatching () {
+
+        // reset everything before doing another matching
+        resetMatching();
     
     // loop through each Agent in residents arrayList
+    // and have each resident call refusal to propose to first hospital on their list
     for(Agent a : residents) {
-        a.setCurMatch((a.getPrefList()).get(0)); // set current match to first in preflist
-        a.proposal(a.getCurMatch()); // propose to current match
+        a.refusal();
     }
 	
     }
@@ -257,17 +260,18 @@ public class SMInstance {
     public Pair<Agent> getBlockingPair () {
         Pair<Agent> blockingPair;
 
-        for(Agent h : hospitals) {
-            for(Agent a : residents) {
-                if(a.prefers(a.getCurMatch(), h) && h.prefers(h.getCurMatch(), a)) {
+        // iterate through each resident and each hospital in each resident's list
+        // if a resident prefers a hospital to their current match and the hospital prefers a
+        // different resident, create a blocking pair of said hospital and resident
+        for(Agent a : residents) {
+            for(Agent h : a.getPrefList()) {
+                if(a.prefers(h, a.getCurMatch()) && h.prefers(a, h.getCurMatch())) {
                     blockingPair = new Pair<Agent>(a, h);
                     return blockingPair;
                 }
             }
         }
-
         return null;
-	
     }
 
     /*
@@ -280,14 +284,13 @@ public class SMInstance {
      */
     public boolean isStable () {
 
-	for(Agent a : residents) {
+        // if there is a blocking pair return false,
+        // otherwise return true that it is stable
         if(getBlockingPair() == null) {
             return true;
-        } else { return false; }
-    }
+        } else {
+            return false;
+        }
 
-	return false; // delete this line
     }
-
-        
 }

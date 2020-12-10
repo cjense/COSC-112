@@ -67,27 +67,26 @@ public class Agent {
      */
     public boolean prefers (Agent a, Agent b) {
     
-        // iterate over this agent's prefList
-        for(int i = 0; i < prefList.size(); i++) {
-            // if a is not in prefList, return false
-            if(!prefList.contains(a)) {
-                return false;
-            // if prefList contains a and b is null or not on preflist, return true
-            } else if(prefList.contains(a) && (b == null || !prefList.contains(b))) {
-                return true;
-            // if a is null and preflist doesn't contain b, return true
-            } else if(a == null && !prefList.contains(b)) {
-                return true;
-            }
-
-            // if a and b are in prefList and a is before b, return true
-            if((prefList.contains(a) && prefList.contains(b)) && (prefList.indexOf(a) < prefList.indexOf(b))) {
-                return true;
-            }
-
+        // if a is not in prefList, return false
+        if(!prefList.contains(a)) {
+            return false;
         }
-        return false; // maybe remove this?
+        // if prefList contains a and b is null or not on preflist, return true
+        if(prefList.contains(a) && (b == null || !prefList.contains(b))) {
+            return true;
+        }
+        // if a is null and preflist doesn't contain b, return true
+        if(a == null && !prefList.contains(b)) {
+            return true;
+        }
 
+        // if a and b are in prefList and a is before b, return true
+        if((prefList.contains(a) && prefList.contains(b)) && (prefList.indexOf(a) < prefList.indexOf(b))) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     /*
@@ -109,11 +108,12 @@ public class Agent {
         // if this Agent prefers Agent a over current match, change current match to a
         // and send refusal to current match
         } else if(this.prefers(a, curMatch)) {
-            // if current match is not null, set current match to a then refuse
+            // if current match is not null, set current match to a and refuse old match
             // otherwise just set current match to Agent a
             if(curMatch != null) {
+                Agent refusedAgent = curMatch;
                 this.setCurMatch(a);
-                curMatch.refusal();
+                refusedAgent.refusal();
             } else {
                 this.setCurMatch(a);
             }
